@@ -1,4 +1,4 @@
 **/__pycache__
 
-image_data/compressed*
-metrics
+image_data/compressed*/*
+metrics/*/*
