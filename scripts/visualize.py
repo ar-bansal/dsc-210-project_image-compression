@@ -218,7 +218,7 @@ def _plot_image_comparison_helper(original_image: np.ndarray, compressed_image: 
 
     plot_image(original_image, axes[0], "Original Image")
     plot_image(compressed_image, axes[1], "Compressed Image")
-    plot_image(original_image - compressed_image, axes[2], "Difference of Images")
+    plot_image(original_image - compressed_image, axes[2], "Appoximation Error")
 
     if not stats is None:
         plot_image(np.ones_like(original_image) * 255, axes[3], "Statistics", label=str(stats))

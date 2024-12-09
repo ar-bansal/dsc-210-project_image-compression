@@ -5,7 +5,7 @@ import pandas as pd
 import cv2
 import glymur
 from skimage.metrics import structural_similarity as ssim, peak_signal_noise_ratio as psnr
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Literal
 from scripts.common import load_config
 
 
@@ -74,7 +74,7 @@ def calculate_metrics(original_image_path: str, compressed_image_path: str) -> D
     return metrics
 
 
-def save_metrics(compressed: Dict[str, Dict[str, Union[List[np.ndarray], pd.DataFrame]]], method: str) -> None:
+def save_metrics(compressed: Dict[str, Dict[str, Union[List[np.ndarray], pd.DataFrame]]], method: Literal["jp2", "svd"]) -> None:
     """
     Save the compression metrics to CSV files for each compression parameter.
 

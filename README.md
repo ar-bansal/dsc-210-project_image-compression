@@ -1,10 +1,52 @@
 # dsc-210-project_image-compression
+
 A systematic comparison of linear algebra-based and state of the art image compression techniques
----
+
+Course: DSC 210 - Numerical Linear Algebra
+Instructor: Dr. Tsui-Wei Weng
+
+The aim of this project is to compare SVD-based image compression with the state of the art method, JPEG2000. For this, we used the Kodak Lossless True Color Image Suite, which is a widely used benchmark in image compression research. 
+
+For SVD, we used `numpy`, and for JPEG2000, we utilized the implementation in `Glymur`. 
+
+
+# Results
+
+## SVD-based Image Compression
+![alt text](assets/svd_metrics.png)
+For SVD, the parameter used to control the compression was the explained variance. A higher explained variance leads to lower compression ratios. 
+
+SVD based compression achieved poor results, with compression ratios up to 2.2. Even at 97% variance, the PSNR, on average, was below 20 dB, and SSIM was under 0.7, indicating poor quality. 
+
+
+SVD-based compression with a retained variance of 95%
+![alt text](assets/svd_95_comparison.png) 
+SVD-based compression with a retained variance of 99.9%
+![alt text](assets/svd_999_comparison.png)
+Here we have SVD-based compression at an explained variance of 95%. As evidenced by the difference of images, there was a significant loss of detail. This is why the compressed image does not look anything like the original image. 
+
+If we increase the retained variance to 99%, the difference between images is minimal. We achieve a better quality image, but the compression ratio is close to 1. 
+
+
+## JPEG2000
+![alt text](assets/jp2_metrics.png)
+The JPEG2000 compression was controlled by the compression ratio. 
+
+JPEG2000 achieved compression ratios as high as 70, which is a 70 times reduction in file size, with high PSNR and structural similarity, indicating excellent compression quality. 
+
+JPEG2000 compression with a compression ratio of 5
+![alt text](assets/jp2k_5_comparison.png) 
+JPEG2000 compression with a compression ratio of 100
+![alt text](assets/jp2k_100_comparison.png)
+Looking at the JPEG2K compressed image at a compression ratio of 5, no discernable details were lost. This results in a better compression without loss of visual quality. 
+
+Even at a compression ratio of 100, there was no blurring or loss of detail, demonstrating efficient compression without visual degradation. 
+
+
 
 # Instructions for running the project:
 ## Prerequisites
-    - Ubuntu on Linux/WSL/Docker
+    - Ubuntu 20.04+ on Linux/WSL/Docker
     - Active installation of conda
 
 ## Setting up the project
@@ -25,4 +67,6 @@ A systematic comparison of linear algebra-based and state of the art image compr
     - `PROJECT_DIR` needs to be set to the current working directory. DO NOT change the other variables. 
 
 ## Running the code
-1. Run the `image_compression.ipynb` notebook.
+1. Select the `dsc210-project-team24` environment to create a kernel. 
+
+2. Run the `image_compression.ipynb` notebook.
