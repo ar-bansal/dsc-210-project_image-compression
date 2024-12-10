@@ -1,10 +1,10 @@
-DSC 210 Project: Image Compression 
+# DSC 210 Project: Image Compression 
 
 A systematic comparison of linear algebra-based and state of the art image compression techniques
 
 **Course:** DSC 210 - Numerical Linear Algebra  
 **Instructor:** Dr. Tsui-Wei Weng
-**Team Members**
+**Team Members:**
 Aryan Bansal
 Chandrima Das
 Keertana Kappuram
