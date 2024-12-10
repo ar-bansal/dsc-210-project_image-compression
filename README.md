@@ -43,7 +43,7 @@ JPEG2000 achieved compression ratios as high as 70, which is a 70 times reductio
 
 # Instructions for running the project:
 ## Option 1: Docker
-1. Copy the following code into a `Dockerfile`:
+1. Download the `Dockerfile`, or copy the following code into a `Dockerfile` (no need to clone the repository):
 ```
 # Start with the Miniconda3 base image
 FROM continuumio/miniconda3
@@ -57,59 +57,69 @@ RUN git clone https://github.com/ar-bansal/dsc-210-project_image-compression.git
 # Set the working directory to the cloned repo
 WORKDIR /home/dsc-210-project_image-compression
 
-# Update and upgrade system packages
-RUN apt-get update && apt-get upgrade -y
+# Update and upgrade system packages and install system dependencies
+RUN apt-get update && apt-get upgrade -y && \
+apt-get install -y libopenjp2-7 libopenjp2-tools libgl1-mesa-glx
 
 # Create the conda environment from the environment.yaml file
 RUN conda env create -f environment.yaml
 
-# Install system dependencies
-RUN apt-get install -y libopenjp2-7 libopenjp2-tools libgl1-mesa-glx
-
 # Create necessary directories for the project (relative paths)
-RUN mkdir -p image_data/compressed_jp2
-RUN mkdir -p image_data/compressed_svd
-RUN mkdir -p metrics/jp2
-RUN mkdir -p metrics/svd
+RUN mkdir -p image_data/compressed_jp2 image_data/compressed_svd metrics/jp2 metrics/svd
 
-# Update the PROJECT_DIR in the .env file to the current working directory
+# Set the environment variables in the .env file
 RUN sed -i "s|^PROJECT_DIR=.*|PROJECT_DIR=$(pwd)|" .env
 
+# Install jupyter in the environment
+RUN conda run -n dsc210-project-team24 pip install jupyter
+
 # Activate the environment and start Jupyter Notebook
-CMD ["conda", "run", "-n", "dsc-210-project_image-compression", "jupyter", "notebook", "--ip=0.0.0.0", "--allow-root"]
+CMD ["conda", "run", "-n", "dsc210-project-team24", "jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
 ```
 
 2. Build the docker image:
 ```
 docker build -t image-compression-team24-notebook .
 ```
-Multiple dependencies will be installed during the build, so this step can take up to 5 minutes.
+This step can take 2-4 minutes.
 
-3. 
+3. Run the image:
+```
+docker run -it --rm -p 8888:8888 image-compression-team24-notebook:latest
+```
+Ensure that no other container is already using port 8888, or use a different port. 
+Jupyter may take some time to load, and you may need to refresh the browser a few times. 
+
+4. Run the cells of the image_compression.ipynb notebook. 
 
 
-
-
-## Option 1: Ubuntu/WSL
-
-## Setting up the project
+## Option 2: Ubuntu/WSL + Conda
 1. Clone the repository and navigate to the project's root directory.
 
-2. Setting up the environment
-    - Create the conda environment: 
+2. Set up the environment:
     ```
+    # Create the conda environment
     conda env create -f environment.yaml
-    ```
 
-    - Install `openJPEG`:
-    ```
-    sudo apt install libopenjp2-7 libopenjp2-tools
+    sudo apt-get update 
+    sudo apt-get upgrade -y
+
+    # Install `openJPEG` and other dependencies
+    sudo apt install libopenjp2-7 libopenjp2-tools libgl1-mesa-glx
+
+    # Activate the environment
+    conda activate dsc210-project-team24
+
+    # If using VS code, this can be skipped
+    pip install jupyter
     ```
 
 3. Set the paths in `.env`
-    - `PROJECT_DIR` needs to be set to the current working directory. DO NOT change the other variables.
+    - `PROJECT_DIR` needs to be set to the current working directory (repo directory). DO NOT change the other variables.
 
-## Running the code
-1. Select the `dsc210-project-team24` environment to create a kernel.
+4. Create the directories for storing the compressed images and the metrics
+    ```
+    mkdir -p image_data/compressed_jp2 image_data/compressed_svd metrics/jp2 metrics/svd
+    ```
 
-2. Run the `image_compression.ipynb` notebook.
+5. Run the cells of the image_compression.ipynb notebook. (If using VS Code, use the dsc210-project-team24 environment to create a kernel.)
