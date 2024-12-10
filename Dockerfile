@@ -30,4 +30,4 @@ RUN conda run -n dsc210-project-team24 pip install jupyter
 EXPOSE 8888
 
 # Activate the environment and start Jupyter Notebook
-CMD ["sh", "-c", "echo 'Jupyter is running at: http://localhost:8888' && conda run -n dsc210-project-team24 jupyter notebook --ip=0.0.0.0 --allow-root --NotebookApp.token='' --NotebookApp.password=''"]
+CMD ["sh", "-c", "conda run -n dsc210-project-team24 jupyter notebook --ip=0.0.0.0 --allow-root --NotebookApp.token='' --NotebookApp.password=''"]

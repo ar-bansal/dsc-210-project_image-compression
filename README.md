@@ -44,14 +44,14 @@ JPEG2000 achieved compression ratios as high as 70, which is a 70 times reductio
 *Even at a compression ratio of 100, there was no blurring or loss of detail, demonstrating efficient compression without visual degradation.*
 
 
-# Instructions for running the project:
+# Instructions to Replicate
 ## Option 1: Docker
 * Note: Ensure that the network connectivity is good - the build stage will fail if the network speed is low. 
 1. Download the `Dockerfile` (no need to clone the repository). 
 
 2. Build the docker image:
 ```
-docker build -t image-compression-team24-notebook .
+docker build --no-cache -t image-compression-team24-notebook .
 ```
 This step can take 6-7 minutes.
 
@@ -60,9 +60,10 @@ This step can take 6-7 minutes.
 docker run -it --rm -p 8888:8888 image-compression-team24-notebook:latest
 ```
 Ensure that no other container is already using port 8888, or use a different port. 
-Jupyter may take some time to load, and you may need to refresh the browser a few times. 
 
-4. Run the cells of the image_compression.ipynb notebook.  
+4. Navigate to `https://127.0.0.1:8888/tree?` (replace port number, if necessary). Jupyter may take some time to load, and you may need to refresh the browser a few times.  
+
+5. Run the cells of the image_compression.ipynb notebook.  
 
 
 ## Option 2: Ubuntu/WSL + Conda
