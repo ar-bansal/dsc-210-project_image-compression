@@ -42,22 +42,68 @@ JPEG2000 achieved compression ratios as high as 70, which is a 70 times reductio
 
 
 # Instructions for running the project:
-## Prerequisites
-    - Ubuntu 20.04+ on Linux/WSL/Docker
-    - Active installation of conda
+## Option 1: Docker
+1. Copy the following code into a `Dockerfile`:
+```
+# Start with the Miniconda3 base image
+FROM continuumio/miniconda3
+
+# Set the working directory
+WORKDIR /home
+
+# Clone the repository
+RUN git clone https://github.com/ar-bansal/dsc-210-project_image-compression.git
+
+# Set the working directory to the cloned repo
+WORKDIR /home/dsc-210-project_image-compression
+
+# Update and upgrade system packages
+RUN apt-get update && apt-get upgrade -y
+
+# Create the conda environment from the environment.yaml file
+RUN conda env create -f environment.yaml
+
+# Install system dependencies
+RUN apt-get install -y libopenjp2-7 libopenjp2-tools libgl1-mesa-glx
+
+# Create necessary directories for the project (relative paths)
+RUN mkdir -p image_data/compressed_jp2
+RUN mkdir -p image_data/compressed_svd
+RUN mkdir -p metrics/jp2
+RUN mkdir -p metrics/svd
+
+# Update the PROJECT_DIR in the .env file to the current working directory
+RUN sed -i "s|^PROJECT_DIR=.*|PROJECT_DIR=$(pwd)|" .env
+
+# Activate the environment and start Jupyter Notebook
+CMD ["conda", "run", "-n", "dsc-210-project_image-compression", "jupyter", "notebook", "--ip=0.0.0.0", "--allow-root"]
+```
+
+2. Build the docker image:
+```
+docker build -t image-compression-team24-notebook .
+```
+Multiple dependencies will be installed during the build, so this step can take up to 5 minutes.
+
+3. 
+
+
+
+
+## Option 1: Ubuntu/WSL
 
 ## Setting up the project
 1. Clone the repository and navigate to the project's root directory.
 
 2. Setting up the environment
-    - Give execution permission to `setup_env.sh`:
+    - Create the conda environment: 
     ```
-    chmod +x setup_env.sh
+    conda env create -f environment.yaml
     ```
 
-    - Run `setup_env.sh`
+    - Install `openJPEG`:
     ```
-    ./setup_env.sh
+    sudo apt install libopenjp2-7 libopenjp2-tools
     ```
 
 3. Set the paths in `.env`
