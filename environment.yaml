@@ -23,11 +23,11 @@ dependencies:
   - wheel=0.44.0=py310h06a4308_0
   - xz=5.4.6=h5eee18b_1
   - zlib=1.2.13=h5eee18b_1
+  - conda-forge::jupyter
   - pip:
       - glymur==0.13.6
       - ipykernel==6.29.5
       - ipython==8.30.0
-      - jupyter==1.1.1
       - jupyter-client==8.6.3
       - jupyter-core==5.7.2
       - matplotlib==3.9.3

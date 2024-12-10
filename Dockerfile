@@ -28,5 +28,10 @@ RUN mkdir -p metrics/svd
 # Set the environment variables in the .env file
 RUN sed -i "s|^PROJECT_DIR=.*|PROJECT_DIR=$(pwd)|" .env
 
+RUN conda init bash
+# RUN conda activate dsc210-project-team24
+RUN pip install jupyter
+
 # Activate the environment and start Jupyter Notebook
-CMD ["conda", "run", "-n", "dsc210-project-team24", "jupyter", "notebook", "--ip=0.0.0.0", "--allow-root"]
+# CMD ["conda", "run", "-n", "dsc210-project-team24", "jupyter", "notebook", "--ip=0.0.0.0", "--allow-root"]
+CMD ["bash", "-c", "source activate dsc210-project-team24 && jupyter notebook --ip=0.0.0.0 --allow-root"]
