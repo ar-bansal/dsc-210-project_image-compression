@@ -3,12 +3,9 @@
 A systematic comparison of linear algebra-based and state of the art image compression techniques
 
 **Course:** DSC 210 - Numerical Linear Algebra  
-**Instructor:** Dr. Tsui-Wei Weng
+**Instructor:** Dr. Tsui-Wei Weng  
 **Team Members:**
-Aryan Bansal
-Chandrima Das
-Keertana Kappuram
-Shreejith Suthraye Gokulnath
+Aryan Bansal, Chandrima Das, Keertana Kappuram, Shreejith Suthraye Gokulnath  
 
 
 The aim of this project is to compare SVD-based image compression with the state of the art method, JPEG2000. For this, we used the Kodak Lossless True Color Image Suite, which is a widely used benchmark in image compression research.
@@ -96,7 +93,7 @@ docker run -it --rm -p 8888:8888 image-compression-team24-notebook:latest
 Ensure that no other container is already using port 8888, or use a different port. 
 Jupyter may take some time to load, and you may need to refresh the browser a few times. 
 
-4. Run the cells of the image_compression.ipynb notebook. 
+4. Run the cells of the image_compression.ipynb notebook.  
 
 
 ## Option 2: Ubuntu/WSL + Conda
@@ -110,7 +107,7 @@ Jupyter may take some time to load, and you may need to refresh the browser a fe
     sudo apt-get update 
     sudo apt-get upgrade -y
 
-    # Install `openJPEG` and other dependencies
+    # Install openJPEG and other dependencies
     sudo apt install libopenjp2-7 libopenjp2-tools libgl1-mesa-glx
 
     # Activate the environment
@@ -120,8 +117,7 @@ Jupyter may take some time to load, and you may need to refresh the browser a fe
     pip install jupyter
     ```
 
-3. Set the paths in `.env`
-    - `PROJECT_DIR` needs to be set to the current working directory (repo directory). DO NOT change the other variables.
+3. Set the paths in `.env`. Only `PROJECT_DIR` needs to be set to the current working directory (repo directory). DO NOT change the other variables.
 
 4. Create the directories for storing the compressed images and the metrics
     ```
