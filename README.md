@@ -1,9 +1,15 @@
-# dsc-210-project_image-compression
+DSC 210 Project: Image Compression 
 
 A systematic comparison of linear algebra-based and state of the art image compression techniques
 
 **Course:** DSC 210 - Numerical Linear Algebra  
 **Instructor:** Dr. Tsui-Wei Weng
+**Team Members**
+Aryan Bansal
+Chandrima Das
+Keertana Kappuram
+Shreejith Suthraye Gokulnath
+
 
 The aim of this project is to compare SVD-based image compression with the state of the art method, JPEG2000. For this, we used the Kodak Lossless True Color Image Suite, which is a widely used benchmark in image compression research.
 
