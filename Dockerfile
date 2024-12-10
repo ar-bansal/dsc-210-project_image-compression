@@ -4,8 +4,9 @@ FROM continuumio/miniconda3
 # Set the working directory
 WORKDIR /home
 
-# Clone the repository
-RUN git clone https://github.com/ar-bansal/dsc-210-project_image-compression.git
+# Clone the main branch from the repository
+RUN git config --global http.postBuffer 524288000
+RUN git clone --depth 1 https://github.com/ar-bansal/dsc-210-project_image-compression.git
 
 # Set the working directory to the cloned repo
 WORKDIR /home/dsc-210-project_image-compression
@@ -26,5 +27,7 @@ RUN sed -i "s|^PROJECT_DIR=.*|PROJECT_DIR=$(pwd)|" .env
 # Install jupyter in the environment
 RUN conda run -n dsc210-project-team24 pip install jupyter
 
+EXPOSE 8888
+
 # Activate the environment and start Jupyter Notebook
-CMD ["conda", "run", "-n", "dsc210-project-team24", "jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+CMD ["sh", "-c", "echo 'Jupyter is running at: http://localhost:8888' && conda run -n dsc210-project-team24 jupyter notebook --ip=0.0.0.0 --allow-root --NotebookApp.token='' --NotebookApp.password=''"]
